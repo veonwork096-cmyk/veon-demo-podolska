@@ -1,0 +1,35 @@
+---
+import Section from "./Section.astro";
+import Portrait from "./Portrait.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { people, teamGroups, contacts, FUTURE } from "../data/clinic";
+---
+<Section id="likari" rec="R-105,S-R011" class="section doctors">
+  <div class="container">
+    <div class="section__head">
+      <h2>Лікарі клініки</h2>
+      <p class="section__intro">Знайомтеся заздалегідь: хто веде прийом у кожному напрямі.</p>
+    </div>
+    <div class="doctors__grid">
+      <div class="founder">
+        <Portrait person={people.podolska} size="lg" showRole={false} />
+        <p class="founder__role">{people.podolska.role}, засновниця клініки</p>
+        <div class="founder__actions">
+          <a class="btn btn--primary" href={contacts.reception.href}><Icon name="phone" />Записатися</a>
+          <FutureLink note={FUTURE}>Усі лікарі</FutureLink>
+        </div>
+      </div>
+      <div class="groups">
+        {teamGroups.map((g, i) => (
+          <div class:list={["group", { "group--solo": g.members.length === 1 }]} style={`--n:${g.members.length}`}>
+            <h3 class="group__title" id={`grp-${i}`}>{g.title}</h3>
+            <ul class="group__people" aria-labelledby={`grp-${i}`}>
+              {g.members.map((m) => <li><Portrait person={m} size="sm" /></li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>

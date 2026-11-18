@@ -1,0 +1,40 @@
+---
+import "../styles/tokens.css";
+import "../styles/fonts.css";
+import "../styles/global.css";
+import "../styles/site.css";
+import "../styles/sections.css";
+import manropeCyr from "../assets/fonts/manrope-cyrillic-wght-normal.woff2?url";
+
+interface Props { lang: string; title: string; description: string; canonical?: string; rec?: string; }
+const { lang, title, description, canonical, rec } = Astro.props;
+---
+<!doctype html>
+<html lang={lang} data-rec="R-112,R-201,R-204">
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="uk_UA" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={manropeCyr} as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+    <style is:global>
+      html, body { overflow-x: clip; }
+    </style>
+  </head>
+  <body data-rec={rec}>
+    <a class="skip-link" href="#main">{lang.startsWith("uk") ? "До змісту" : lang.startsWith("ru") ? "К содержанию" : "Skip to content"}</a>
+    <slot name="header" />
+    <main id="main" data-rec="R-203"><slot /></main>
+    <slot name="footer" />
+    <script src="../scripts/reveal.ts"></script>
+    <script src="../scripts/chrome.ts"></script>
+  </body>
+</html>

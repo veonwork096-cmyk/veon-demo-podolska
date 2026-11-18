@@ -1,0 +1,21 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { contacts, FUTURE } from "../data/clinic";
+---
+<Section id="deklaratsiia" class="section">
+  <div class="container">
+    <div class="declaration">
+      <div class="declaration__text">
+        <h2>Медична декларація</h2>
+        <p class="section__intro">Клініка приймає заявки на підписання декларації. З яким лікарем і як підписати, підкажемо телефоном.</p>
+      </div>
+      <div class="declaration__actions">
+        <a class="btn btn--primary" href={contacts.reception.href}><Icon name="phone" />Подзвонити</a>
+        <a class="btn btn--secondary" href={contacts.messengers.viber}><Icon name="chat" />Написати у Viber</a>
+        <FutureLink note={FUTURE}>Онлайн-заява</FutureLink>
+      </div>
+    </div>
+  </div>
+</Section>

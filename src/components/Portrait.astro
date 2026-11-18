@@ -1,0 +1,23 @@
+---
+// Client portrait 3:4 on the tint ground, name and specialty under it. Alt = name and specialty.
+import { Image } from "astro:assets";
+import type { Person } from "../data/clinic";
+
+interface Props { person: Person; size: "xs" | "sm" | "lg"; showRole?: boolean; class?: string; }
+const { person, size, showRole = true, class: cls } = Astro.props;
+const widths = size === "lg" ? [360, 520, 720] : size === "sm" ? [180, 280, 400] : [120, 200, 280];
+const sizes = size === "lg"
+  ? "(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 100vw"
+  : size === "sm"
+    ? "(min-width: 64rem) 13vw, (min-width: 48rem) 22vw, 45vw"
+    : "(min-width: 64rem) 8rem, 6.5rem";
+---
+<figure class:list={["portrait", `portrait--${size}`, cls]}>
+  <div class="portrait__frame">
+    <Image src={person.photo} widths={widths} sizes={sizes} alt={`${person.name}, ${person.role.toLowerCase()}`} loading="lazy" decoding="async" />
+  </div>
+  <figcaption>
+    <span class="portrait__name">{person.name}</span>
+    {showRole && <span class="portrait__role">{person.role}</span>}
+  </figcaption>
+</figure>

@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Prices from "../components/Prices.astro";
+import Doctors from "../components/Doctors.astro";
+import Declaration from "../components/Declaration.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import MobileBar from "../components/MobileBar.astro";
+
+const h1 = "Клініка сімейної медицини в Ужгороді, де лікаря ви знаєте на ім'я";
+const title = "Dr. Podolska — клініка сімейної медицини в Ужгороді";
+const description = "Терапевт і гінеколог — від 600 грн, УЗД, ЕКГ, педіатр. Ужгород, Грушевського, 2 Ж. Запис за телефоном +38 099 285 93 25.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  name: "Dr. Podolska",
+  telephone: ["+380992859325", "+380689723454"],
+  address: { "@type": "PostalAddress", streetAddress: "вул. Грушевського, 2 Ж", addressLocality: "Ужгород", addressCountry: "UA" },
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:00", closes: "17:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "15:00" },
+  ],
+  paymentAccepted: "Visa, Mastercard, Apple Pay, Google Pay",
+  currenciesAccepted: "UAH",
+};
+---
+<Base lang="uk" title={title} description={description} rec="R-202,R-208,R-303,R-304,R-305">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header slot="header" />
+  <Hero h1={h1} />
+  <Services />
+  <Prices />
+  <Doctors />
+  <Declaration />
+  <Contacts />
+  <Fragment slot="footer">
+    <Footer />
+    <MobileBar />
+  </Fragment>
+</Base>

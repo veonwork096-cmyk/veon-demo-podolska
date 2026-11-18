@@ -1,0 +1,32 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { prices, contacts, FUTURE } from "../data/clinic";
+---
+<Section id="tsiny" rec="R-103" class="section-deep on-deep">
+  <div class="container prices">
+    <div class="prices__head">
+      <h2>Ціни на прийоми та обстеження</h2>
+      <p class="prices__note">
+        Ціни для громадян України можуть відрізнятися від прейскуранта клініки, тож уточнюйте їх за телефонами
+        <a class="nowrap" href={contacts.reception.href}>{contacts.reception.short}</a> або <a class="nowrap" href={contacts.messengers.tel}>{contacts.messengers.short}</a>.
+      </p>
+    </div>
+    <dl class="pricelist">
+      {prices.map((p) => (
+        <div class="pricelist__row">
+          <dt>{p.name}</dt>
+          <dd><span class="pricelist__sum">{p.price}</span> грн</dd>
+        </div>
+      ))}
+    </dl>
+    <div class="prices__foot">
+      <p class="prices__pay">Оплата карткою Visa і Mastercard, Apple Pay, Google Pay.</p>
+      <div class="prices__actions">
+        <a class="btn btn--light" href={contacts.reception.href}><Icon name="phone" />Записатися на прийом</a>
+        <FutureLink note={FUTURE}>Весь прайс</FutureLink>
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,50 @@
+---
+import { Picture } from "astro:assets";
+import team from "../assets/img/team-group.webp";
+import Icon from "./Icon.astro";
+import { contacts } from "../data/clinic";
+
+interface Props { h1: string; }
+const { h1 } = Astro.props;
+---
+<section id="top" class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <h1 id="hero-title">{h1}</h1>
+      <p class="hero__lead" data-rec="R-115">
+        Усе для вашого здоров'я в одному просторі: підтримка терапевта на всіх етапах, 10 років досвіду в медицині та аналізи разом з лабораторією-партнером.
+      </p>
+    </div>
+    <aside class="reception" id="reception" aria-label="Рецепція" data-rec="R-101,R-102,R-209,S-R012">
+      <p class="reception__label">Рецепція, запис на прийом</p>
+      <a class="reception__phone" href={contacts.reception.href}>{contacts.reception.display}</a>
+      <div class="reception__actions">
+        <a class="btn btn--light" href={contacts.reception.href}><Icon name="phone" />Подзвонити</a>
+        <a class="btn btn--outline-light" href={contacts.messengers.viber}><Icon name="chat" />Написати у Viber</a>
+      </div>
+      <p class="reception__note">Viber, Telegram і Messenger: <span class="nowrap">{contacts.messengers.display}</span></p>
+      <dl class="hours hours--deep">
+        {contacts.hours.map((h) => (
+          <div class="hours__row"><dt><abbr title={h.full}>{h.days}</abbr></dt><dd>{h.time}</dd></div>
+        ))}
+      </dl>
+      <p class="reception__address">
+        <span>{contacts.address.street}, Ужгород</span>
+        <a href={contacts.map} rel="noopener" target="_blank"><Icon name="route" size={18} />Маршрут<span class="visually-hidden"> (Google Maps, нова вкладка)</span></a>
+      </p>
+    </aside>
+  </div>
+</section>
+<div class="team-band" data-rec="R-112,R-301,R-302,R-309">
+  <Picture
+    src={team}
+      formats={["avif", "webp"]}
+      fallbackFormat="webp"
+      widths={[480, 768, 1200, 1600, 2048]}
+      sizes="100vw"
+      alt="Команда клініки Dr. Podolska"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+</div>

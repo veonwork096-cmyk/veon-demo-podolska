@@ -1,0 +1,8 @@
+---
+import Icon from "./Icon.astro";
+import { contacts } from "../data/clinic";
+---
+<div class="callbar" data-callbar data-rec="R-101,R-102,R-209">
+  <a class="btn btn--primary" href={contacts.reception.href}><Icon name="phone" />Подзвонити</a>
+  <a class="btn btn--secondary" href={contacts.messengers.viber}><Icon name="chat" />Viber</a>
+</div>

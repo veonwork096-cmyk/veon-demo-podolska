@@ -1,0 +1,29 @@
+---
+import logo from "../assets/img/podolska-logo.svg";
+import FutureLink from "./FutureLink.astro";
+import { contacts, FUTURE } from "../data/clinic";
+
+const future = ["Про клініку", "Прийоми лікарів", "УЗД", "ЕКГ та ехо", "Аналізи", "Чекапи", "Лікарі", "Онлайн-запис"];
+---
+<footer class="site-footer" data-rec="R-111,R-114">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="logo" href="#top"><img src={logo.src} width="132" height="32" alt="Dr. Podolska, на початок сторінки" /></a>
+      <p class="text-muted">{contacts.address.city}, {contacts.address.street}</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Розділи сайту">
+      <ul>
+        {future.map((f) => <li><FutureLink note={FUTURE}>{f}</FutureLink></li>)}
+      </ul>
+    </nav>
+    <div class="site-footer__contacts">
+      <a href={contacts.reception.href}>{contacts.reception.display}</a>
+      <a href={contacts.messengers.tel}>{contacts.messengers.display}</a>
+      <p class="text-muted">Пн–Пт 8:00–17:00, Сб 9:00–15:00, Нд вихідний</p>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>© Dr. Podolska</p>
+    <FutureLink note={FUTURE}>Політика конфіденційності</FutureLink>
+  </div>
+</footer>
